@@ -1,0 +1,26 @@
+
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% load static %}
+
+{% block title %} | About{% endblock %} <!-- this is to make custom title -->
+
+{% block content %}
+<h1>Here we can create about page </h1> <!-- here we put all content for main page for about page -->
+
+    {% if pages %}
+        {% for page in pages %}
+        <div> This will go to some looping through the div</div>
+       <!--  <img src=" page.Screenshot_at_Dec_10_13-55-15.url }}" alt="">  this is how to display pics-->
+        <h4>We can do this by using {{ page.title }}</h4>
+        <h2>price ${{ page.id | intcomma}}</h2>
+        <p> <i></i>{{ page.city }} {{ page.state }} </p>
+
+        <div>{{ page.list_date | timesince }}</div>
+    {% endfor %}
+    {% endif %}
+
+
+
+{% endblock %}

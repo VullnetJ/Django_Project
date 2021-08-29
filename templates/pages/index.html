@@ -1,0 +1,40 @@
+
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %} | Home{% endblock %} <!-- this is to make custom title -->
+
+{% block content %}
+
+<h1>This has to show the Inquiry {{ name }}</h1>
+    <h5>Make An Inquiry</h5>
+
+    <form action="{% url 'contact' %}" method="POST">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+            <input type="hidden" name="user_id" value="{{ user.id }}">
+        {% else %}
+            <input type="text" name="user_id" value="0">
+        {% endif %}
+        <br>
+            <label for="name">Name:</label>
+            <input type="text" name="name" {% if user.is_authenticated %} value="{{ user.first_name }} {{ user.last_name }}" {% endif %} required>
+        <br>
+            <label for="email">Email:</label>
+            <input type="email" name="email" {% if user.is_authenticated %} value="{{ user.email }}" {% endif %} required>
+        <br>
+            <label for="phone">Phone:</label>
+            <input type="text" name="phone">
+        <br>
+            <label for="message">Message:</label>
+            <input type="text" name="name" >
+        <br>
+            <textarea name="message"></textarea>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    {% include 'partials/_alerts.html' %}
+    
+
+{% endblock %}
